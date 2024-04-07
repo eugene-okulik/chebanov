@@ -2,15 +2,15 @@
 
 text = "Etiam tincidunt neque erat, quis molestie enim imperdiet vel. Integer urna nisl," \
        " facilisis vitae semper at, dignissim vitae libero"
-l = []
+value = []
 for i in text.split():
     if i[-1] == ',':
-        l.append(i[0:-1] + 'ing,')
+        value.append(i[0:-1] + 'ing,')
     elif i[-1] == '.':
-        l.append(i[0:-1] + 'ing.')
+        value.append(i[0:-1] + 'ing.')
     else:
-        l.append(i + 'ing')
-print(*l)
+        value.append(i + 'ing')
+print(*value)
 
 # Задание №2
 
