@@ -3,14 +3,19 @@ import sys
 # Задание 2
 sys.set_int_max_str_digits(30000)
 
-
-def febonachi():
-    f = [1, 1]
-    f1 = f2 = 1
-    for i in range(1, 100000):
-        f.append(f1 + f2)
-        f1, f2 = f2, (f1 + f2)
-    print(f[4], f[199], f[999], f[99999], sep="\n", )
+count = 0
+value = 100000
 
 
-febonachi()
+def fib(n):
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+
+
+g = list(fib(value))
+for i in g:
+    if i == g[4] or i == g[199] or i == g[999] or i == g[99999]:
+        count += 1
+        print(f'{count}){i}\n')
