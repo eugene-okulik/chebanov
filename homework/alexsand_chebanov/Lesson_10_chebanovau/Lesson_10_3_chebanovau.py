@@ -1,13 +1,13 @@
 def finish_me(func):
     def wrapper(first, second):
         if first == second:
-            return print(first + second)
-        if first > second:
-            return print(second - first)
-        if second > first:
-            return print(first / second)
-        if first < 0 or second < 0:
-            return func()
+            return func(first, second, "+")
+        elif first > second:
+            return func(first, second, "-")
+        elif second > first:
+            return func(first, second, "/")
+        elif first or second < 0:
+            return func(first, second, "*")
 
     return wrapper
 
@@ -27,4 +27,11 @@ def calc(first, second, operation):
             print("На ноль делить нельзя")
 
 
-calc(1, 0)
+def math():
+    x = float(input("Введите число 1: "))
+    y = float(input("Введите число 2: "))
+    result = calc(x, y)
+    print(f"Результат {result}")
+
+
+math()
