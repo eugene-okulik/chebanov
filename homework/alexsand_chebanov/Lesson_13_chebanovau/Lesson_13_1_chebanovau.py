@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 
 # Чтение файла и обработка дат
-with open(r"C:\Okulik_AQA\chebanov\homework\eugene_okulik\hw_13\data.txt", 'r',encoding="utf-8") as file:
+with open(r"C:\Okulik_AQA\chebanov\homework\eugene_okulik\hw_13\data.txt", 'r', encoding="utf-8") as file:
     lines = file.readlines()
     for line in lines:
         parts = line.strip().split(' - ')
