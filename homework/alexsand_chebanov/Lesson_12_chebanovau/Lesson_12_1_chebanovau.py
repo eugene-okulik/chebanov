@@ -1,5 +1,5 @@
 class Flower:
-    def __init__(self, color, length, stoimost, life_time):
+    def __init__(self, name, color, length, stoimost, life_time):
         self.color = color
         self.length = length
         self.stoimost = stoimost
@@ -7,9 +7,9 @@ class Flower:
 
 
 class Romashka(Flower):
-    def __init__(self, color, length, stoimost, life_time, name):
-        super().__init__(color, length, stoimost, life_time)
-        self.name = name
+    def __init__(self, color, length, stoimost, life_time):
+        super().__init__('Ромашка', color, length, stoimost, life_time)
+        self.name = "Ромашка"
 
     def __str__(self):
         return f'{self.name}'
@@ -19,9 +19,9 @@ class Romashka(Flower):
 
 
 class Tylpan(Flower):
-    def __init__(self, color, length, stoimost, life_time, name):
-        super().__init__(color, length, stoimost, life_time)
-        self.name = name
+    def __init__(self, color, length, stoimost, life_time):
+        super().__init__('Тюльпан', color, length, stoimost, life_time)
+        self.name = "Тюльпан"
 
     def __str__(self):
         return f'{self.name}'
@@ -49,8 +49,8 @@ class Bouquet:
         return [flower for flower in self.flowers if flower.life_time == life_time]
 
 
-romashka = Romashka('white', 23, 20, 12, 'Ромашка')
-tylpan = Tylpan('red', 10, 120, 15, 'Тюльпан')
+romashka = Romashka('white', 23, 20, 12)
+tylpan = Tylpan('red', 10, 120, 15)
 
 bouquet = Bouquet()
 bouquet.add_flower(romashka)
