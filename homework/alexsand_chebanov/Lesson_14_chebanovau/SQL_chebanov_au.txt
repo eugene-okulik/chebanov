@@ -1,0 +1,45 @@
+
+1) INSERT INTO `st-onl`.`students` (`name`, `second_name`) VALUES ('Alex', 'Alex');
+UPDATE `st-onl`.`students` SET `group_id` = '2' WHERE (`id` = '1115');
+
+2) INSERT INTO `st-onl`.`books` (`id`, `title`, `taken_by_student_id`) VALUES ('2204', 'Рембо первая кровь', '1115');
+INSERT INTO `st-onl`.`books` (`id`, `title`, `taken_by_student_id`) VALUES ('2205', 'Рембо вторая кровь', '1115');
+
+3) INSERT INTO `st-onl`.`groups` (`title`, `start_date`, `end_date`) VALUES ('Tolsoi', 'apr 2024', 'may 2024');
+UPDATE `st-onl`.`students` SET `group_id` = 2 where id = 1115
+
+4) INSERT INTO `st-onl`.`subjets` (`title`) VALUES ('Чебанов_SQL'); 
+INSERT INTO `st-onl`.`subjets` (`title`) VALUES ('Чебанов_AQA');    
+INSERT INTO `st-onl`.`subjets` (`title`) VALUES ('Чебанов_Python'); 
+
+5) INSERT INTO `st-onl`.`lessons` (`title`, `subject_id`) VALUES ('История', '1449'); 
+INSERT INTO `st-onl`.`lessons` (`title`, `subject_id`) VALUES ('Биология', '1450'); 
+INSERT INTO `st-onl`.`lessons` (`title`, `subject_id`) VALUES ('Химия', '1451');  
+INSERT INTO `st-onl`.`lessons` (`title`, `subject_id`) VALUES ('Русский', '1449');  
+INSERT INTO `st-onl`.`lessons` (`title`, `subject_id`) VALUES ('Матиматика', '1450'); 
+INSERT INTO `st-onl`.`lessons` (`title`, `subject_id`) VALUES ('Литиратура', '1451');
+
+6) INSERT INTO `st-onl`.`marks` (`value`, `lesson_id`, `student_id`) VALUES ('1', '3556', '1115');
+INSERT INTO `st-onl`.`marks` (`value`, `lesson_id`, `student_id`) VALUES ('2', '3557', '1115');
+INSERT INTO `st-onl`.`marks` (`value`, `lesson_id`, `student_id`) VALUES ('3', '3558', '1115');
+INSERT INTO `st-onl`.`marks` (`value`, `lesson_id`, `student_id`) VALUES ('4', '3559', '1115');
+INSERT INTO `st-onl`.`marks` (`value`, `lesson_id`, `student_id`) VALUES ('5', '3560', '1115');
+INSERT INTO `st-onl`.`marks` (`value`, `lesson_id`, `student_id`) VALUES ('3', '3561', '1115');
+
+Получите информацию из базы данных:
+
+1) SELECT value FROM `st-onl`.marks where student_id = 1115 ;
+2) SELECT title FROM `st-onl`.books where taken_by_student_id = 1115;
+3) SELECT s.name, g.title, b.title, m.value, l.title, s2.title
+FROM students s
+JOIN `groups` g
+ON s.group_id = g.id
+JOIN books b
+ON s.id = b.taken_by_student_id
+JOIN marks m
+ON s.id = m.student_id
+JOIN lessons l
+ON m.lesson_id = l.id
+JOIN subjets s2
+ON s2.id  = l.subject_id
+WHERE s.id = 1115
