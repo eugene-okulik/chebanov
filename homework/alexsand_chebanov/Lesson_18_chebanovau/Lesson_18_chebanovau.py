@@ -29,7 +29,8 @@ post_a_post()
 
 
 def put_a_put():
-    url = f'https://api.restful-api.dev/objects/{post_a_post()}'
+    id_value = post_a_post()
+    url = f'https://api.restful-api.dev/objects/{id_value}'
     body = {
         "name": "Apple MacBook Pro 16",
         "data": {
@@ -58,7 +59,8 @@ put_a_put()
 
 
 def patch_a_patch():
-    url = f'https://api.restful-api.dev/objects/{post_a_post()}'
+    id_value = post_a_post()
+    url = f'https://api.restful-api.dev/objects/{id_value}'
     body = {
         "name": "Apple MacBook Pro 999 (Updated Name)"
     }
@@ -80,7 +82,8 @@ patch_a_patch()
 
 
 def delite_a_delite():
-    url = f'https://api.restful-api.dev/objects/{post_a_post()}'
+    id_value = post_a_post()
+    url = f'https://api.restful-api.dev/objects/{id_value}'
 
     response = requests.delete(
         url
@@ -88,7 +91,7 @@ def delite_a_delite():
 
     value = response.json()
     assert response.status_code == 200
-    assert value["message"] == f"Object with id = {post_a_post()} has been deleted."
+    assert value["message"] == f"Object with id = {id_value} has been deleted."
     print("Удаление прошло успешно")
 
 
