@@ -40,7 +40,34 @@ def test_post_a_post(session_start, before_test):
     requests.delete(f'https://api.restful-api.dev/objects/{value_id}')
 
 
-print(f"Создание прошло успешно ")
+print("Создание прошло успешно ")
+
+
+@pytest.mark.xfail
+def test_2_post_a_post(before_test):
+    url = 'https://api.restful-api.dev/objects'
+    body = {
+        "name": "Apple MacBook Pro 0",
+        "data": {
+            "year": 19,
+            "price": 9999.99,
+            "CPU model": "Baikal",
+            "Hard disk size": "10 TB"
+        }
+    }
+    response = requests.post(
+        url,
+        json=body,
+
+    )
+    value_id = response.json()["id"]
+    print(value_id)
+    assert response.status_code == 200
+    yield value_id
+    requests.delete(f'https://api.restful-api.dev/objects/{value_id}')
+
+
+print("Создание прошло успешно ")
 
 
 def test_get_a_get(test_post_a_post, before_test):
