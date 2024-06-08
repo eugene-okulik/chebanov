@@ -4,6 +4,7 @@ from test_api_Lesson_21_chebanovau.endpoints.endpoint import Endpoint
 
 
 class CreatePost(Endpoint):
+
     def __init__(self):
         self.post_id = None
 

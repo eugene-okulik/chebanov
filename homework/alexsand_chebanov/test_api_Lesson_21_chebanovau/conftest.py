@@ -3,6 +3,7 @@ from test_api_Lesson_21_chebanovau.endpoints.create_post import CreatePost
 from test_api_Lesson_21_chebanovau.endpoints.put_post import UpdatePost
 from test_api_Lesson_21_chebanovau.endpoints.delete_post import DeletePost
 from test_api_Lesson_21_chebanovau.endpoints.patch_post import PatchPost
+from test_api_Lesson_21_chebanovau.endpoints.get_post import GetPost
 
 
 @pytest.fixture()
@@ -17,16 +18,21 @@ def update_post_endpoints():
 
 @pytest.fixture()
 def path_post_endpoints():
-    return PatchPost
+    return PatchPost()
 
 
 @pytest.fixture()
 def delete_post_endpoints():
-    return DeletePost
+    return DeletePost()
 
 
 @pytest.fixture()
-def post_id(create_post_endpoint):
+def get_post_endpoint():
+    return GetPost()
+
+
+@pytest.fixture()
+def post_id(crete_post_endpoints):
     body = {
         "name": "HOME-PC",
         "data": {
@@ -36,5 +42,5 @@ def post_id(create_post_endpoint):
             "Hard disk size": "2 TB",
         }
     }
-    create_post_endpoint.create_new_post(body)
-    yield create_post_endpoint.post_id
+    crete_post_endpoints.create_new_post(body)
+    yield crete_post_endpoints.post_id
