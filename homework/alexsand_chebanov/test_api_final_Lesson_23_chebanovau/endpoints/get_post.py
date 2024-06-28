@@ -11,7 +11,7 @@ class GetPost(Endpoint):
         """ Метод получения всех постов"""
         headers = headers if headers else self.headers
         self.response = requests.get(
-            self.url,
+            url=f'{self.url}/meme',
             headers=headers
         )
         try:

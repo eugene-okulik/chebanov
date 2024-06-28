@@ -9,7 +9,7 @@ class UpdatePost(Endpoint):
     def put_update_post(self, mem_id, body, headers=None):
         headers = headers if headers else self.headers
         self.response = requests.put(
-            f'{self.url}/{mem_id}',
+            url=f'{self.url}/meme/{mem_id}',
             json=body,
             headers=headers
         )

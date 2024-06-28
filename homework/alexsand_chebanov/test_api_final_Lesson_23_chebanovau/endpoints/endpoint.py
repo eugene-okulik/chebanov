@@ -3,10 +3,20 @@ from test_api_final_Lesson_23_chebanovau.scr.global_enums import GlobalErrorMess
 
 
 class Endpoint:
-    url = 'http://167.172.172.115:52355/meme'
+    url = 'http://167.172.172.115:52355'
     response = None
     json = None
     headers = {'Authorization': None}
+
+    @allure.step("Проверка схемы")
+    def validate_schema(self, schema):
+        """Метод валидации ответа по схеме"""
+        if isinstance(self.response.json(), list):
+            for item in self.response.json():
+                schema(item)
+            else:
+                schema(self.response.json())
+            return self
 
     @allure.step('Check that response is 200')
     def check_that_status_is_200(self):
@@ -24,5 +34,8 @@ class Endpoint:
     def check_that_status_is_403(self):
         assert self.response.status_code == 403, GlobalErrorMessages.WRONG_STATUS_CODE.value
 
-    def check_response_name_is_correct(self, name):
-        assert self.json["info"]["rating"] == name, GlobalErrorMessages.WRONG_NAME.value
+    def check_response_info_rating(self, rating):
+        assert self.json["info"]["rating"] == rating, GlobalErrorMessages.WRONG_NAME.value
+
+    def check_response_delete(self, mem_id):
+        assert self.response.text == f"Meme with id {mem_id} successfully deleted"

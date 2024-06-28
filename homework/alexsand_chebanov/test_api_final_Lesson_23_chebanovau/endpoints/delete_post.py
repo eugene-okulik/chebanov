@@ -8,7 +8,7 @@ class DeletePost(Endpoint):
     def delite_a_delite(self, mem_id, body, headers=None):
         headers = headers if headers else self.headers
         self.response = requests.delete(
-            f'{self.url}/{mem_id}',
+            url=f'{self.url}/meme/{mem_id}',
             json=body,
             headers=headers
         )

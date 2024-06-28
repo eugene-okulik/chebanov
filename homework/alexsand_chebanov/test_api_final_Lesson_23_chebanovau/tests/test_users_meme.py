@@ -1,4 +1,4 @@
-import allure
+from test_api_final_Lesson_23_chebanovau.scr.pydantic_schemas.valid_shema import MemeShema
 import pytest
 
 TEST_VALID = [
@@ -16,17 +16,15 @@ TEST_INVALID_DATA = [
 
 @pytest.mark.parametrize("body", TEST_VALID)
 def test_post_valid(crete_post_endpoints, token_post, body):
-    with allure.step("Создание объекта"):
-        crete_post_endpoints.create_new_post(body, token_post)
-        crete_post_endpoints.check_that_status_is_200()
-        print(crete_post_endpoints.post_id)
+    crete_post_endpoints.create_new_post(body, token_post)
+    crete_post_endpoints.check_that_status_is_200()
+    crete_post_endpoints.validate_schema(MemeShema)
 
 
 @pytest.mark.parametrize("body", TEST_INVALID_DATA, )
 def test_post_invalid(crete_post_endpoints, token_post, body):
     crete_post_endpoints.create_new_post(body, token_post)
     crete_post_endpoints.check_that_status_is_400()
-    print(crete_post_endpoints.response)
 
 
 def test_put_valid(update_post_endpoints, meme_id, token_post):
@@ -42,9 +40,9 @@ def test_put_valid(update_post_endpoints, meme_id, token_post):
     }
 
     update_post_endpoints.put_update_post(mem_id=meme_id, body=body, headers={'Authorization': f'{token_post}'})
-    print(update_post_endpoints.response.text)
+    update_post_endpoints.validate_schema(MemeShema)
     update_post_endpoints.check_that_status_is_200()
-    update_post_endpoints.check_response_name_is_correct(2)
+    update_post_endpoints.check_response_info_rating(2)
 
 
 def test_put_invalid(update_post_endpoints, meme_id, token_post):
@@ -61,7 +59,6 @@ def test_put_invalid(update_post_endpoints, meme_id, token_post):
 
     update_post_endpoints.put_update_post(mem_id=meme_id, body=body, headers={'Authorization': f'{token_post}'})
     update_post_endpoints.check_that_status_is_400()
-    print(update_post_endpoints.response.text)
 
 
 def test_put_net_token(update_post_endpoints, meme_id):
@@ -78,11 +75,11 @@ def test_put_net_token(update_post_endpoints, meme_id):
 
     update_post_endpoints.put_update_post(mem_id=meme_id, body=body)
     update_post_endpoints.check_that_status_is_401()
-    print(update_post_endpoints.response.text)
 
 
 def test_get_all_posts(get_post_endpoint, token_post):
     get_post_endpoint.get_all_posts(headers={'Authorization': f'{token_post}'})
+    get_post_endpoint.validate_schema(MemeShema)
     get_post_endpoint.check_that_status_is_200()
 
 
@@ -102,25 +99,9 @@ def test_delete_posts_valid(delete_post_endpoints, meme_id, token_post):
     }
     delete_post_endpoints.delite_a_delite(mem_id=meme_id, body=body, headers={'Authorization': f'{token_post}'})
     delete_post_endpoints.check_that_status_is_200()
-    print(delete_post_endpoints.response.text)
+    delete_post_endpoints.check_response_delete(mem_id=meme_id)
 
 
-def test_delete_posts_no_my_objekt(delete_post_endpoints, token_post):
-    value = 15
-    body = {
-        "id": value,
-        "info": {
-            "fun": 2,
-            "rating": 1
-        },
-        "tags": [
-            "piu",
-            "pi-piu"
-        ],
-        "text": "Piu-pau oy oy oy",
-        "updated_by": "vkuklin",
-        "url": "https://imgflip.com/i/8ngjno"
-    }
-    delete_post_endpoints.delite_no_object(value=value, body=body, headers={'Authorization': f'{token_post}'})
+def test_delete_not_valid(delete_post_endpoints, token_post):
+    delete_post_endpoints.delite_a_delite(mem_id=15, body=None, headers={'Authorization': f'{token_post}'})
     delete_post_endpoints.check_that_status_is_403()
-    print(delete_post_endpoints.response.text)
