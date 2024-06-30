@@ -19,7 +19,6 @@ class CreatePost(Endpoint):
 
         try:
             self.json = self.response.json()
-            self.post_id = self.json['id']
             return self.response
         except requests.exceptions.JSONDecodeError:
             return None

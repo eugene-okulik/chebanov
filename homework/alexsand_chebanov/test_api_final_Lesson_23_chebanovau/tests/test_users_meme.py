@@ -27,6 +27,9 @@ def test_post_invalid(crete_post_endpoints, token_post, body):
     crete_post_endpoints.check_that_status_is_400()
 
 
+"""Обновление обьекта с прверкой что обновили элемент"""
+
+
 def test_put_valid(update_post_endpoints, meme_id, token_post):
     body = {
         "id": meme_id,
@@ -42,7 +45,11 @@ def test_put_valid(update_post_endpoints, meme_id, token_post):
     update_post_endpoints.put_update_post(mem_id=meme_id, body=body, headers={'Authorization': f'{token_post}'})
     update_post_endpoints.validate_schema(MemeShema)
     update_post_endpoints.check_that_status_is_200()
+    update_post_endpoints.check_response_id_is_correct(update_post_endpoints.response.json()['id'])
     update_post_endpoints.check_response_info_rating(2)
+
+
+"""Обновление объекта с невалидными данными"""
 
 
 def test_put_invalid(update_post_endpoints, meme_id, token_post):
@@ -61,6 +68,9 @@ def test_put_invalid(update_post_endpoints, meme_id, token_post):
     update_post_endpoints.check_that_status_is_400()
 
 
+"""Обновление объекта без токена авторизации"""
+
+
 def test_put_net_token(update_post_endpoints, meme_id):
     body = {
         "id": meme_id,
@@ -77,10 +87,26 @@ def test_put_net_token(update_post_endpoints, meme_id):
     update_post_endpoints.check_that_status_is_401()
 
 
+"""Запрос всех мемов"""
+
+
 def test_get_all_posts(get_post_endpoint, token_post):
     get_post_endpoint.get_all_posts(headers={'Authorization': f'{token_post}'})
     get_post_endpoint.validate_schema(MemeShema)
     get_post_endpoint.check_that_status_is_200()
+
+
+"""Запрос мемов по айди"""
+
+
+def test_getting_meme_by_id(get_post_endpoint, meme_id, token_post):
+    get_post_endpoint.get_one_meme(mem_id=meme_id, headers={'Authorization': f'{token_post}'})
+    get_post_endpoint.validate_schema(MemeShema)
+    get_post_endpoint.check_response_id_is_correct(meme_id)
+    get_post_endpoint.check_that_status_is_200()
+
+
+"""Удаление поста"""
 
 
 def test_delete_posts_valid(delete_post_endpoints, meme_id, token_post):
@@ -100,6 +126,9 @@ def test_delete_posts_valid(delete_post_endpoints, meme_id, token_post):
     delete_post_endpoints.delite_a_delite(mem_id=meme_id, body=body, headers={'Authorization': f'{token_post}'})
     delete_post_endpoints.check_that_status_is_200()
     delete_post_endpoints.check_response_delete(mem_id=meme_id)
+
+
+"""Удаление поста созданного другим пользователем"""
 
 
 def test_delete_not_valid(delete_post_endpoints, token_post):

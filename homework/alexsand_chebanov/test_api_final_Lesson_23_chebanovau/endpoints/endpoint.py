@@ -18,6 +18,11 @@ class Endpoint:
                 schema(self.response.json())
             return self
 
+    @allure.step('Check that id is equal to expected')
+    def check_response_id_is_correct(self, meme_id):
+        """ Проверка ID"""
+        assert self.json['id'] == meme_id, GlobalErrorMessages.WRONG_ID.value
+
     @allure.step('Check that response is 200')
     def check_that_status_is_200(self):
         assert self.response.status_code == 200, GlobalErrorMessages.WRONG_STATUS_CODE.value
