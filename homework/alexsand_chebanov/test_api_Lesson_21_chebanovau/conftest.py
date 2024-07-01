@@ -7,12 +7,12 @@ from test_api_Lesson_21_chebanovau.endpoints.get_post import GetPost
 
 
 @pytest.fixture()
-def crete_post_endpoints():
+def crete_meme_endpoints():
     return CreatePost()
 
 
 @pytest.fixture()
-def update_post_endpoints():
+def update_meme_endpoints():
     return UpdatePost()
 
 
@@ -32,7 +32,7 @@ def get_post_endpoint():
 
 
 @pytest.fixture()
-def post_id(crete_post_endpoints):
+def post_id(crete_meme_endpoints):
     body = {
         "name": "HOME-PC",
         "data": {
@@ -42,5 +42,5 @@ def post_id(crete_post_endpoints):
             "Hard disk size": "2 TB",
         }
     }
-    crete_post_endpoints.create_new_post(body)
-    yield crete_post_endpoints.post_id
+    crete_meme_endpoints.create_new_post(body)
+    yield crete_meme_endpoints.post_id
