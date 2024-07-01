@@ -10,7 +10,7 @@ class CreatePost(Endpoint):
         self.headers = None
 
     @allure.step('Создание объекта')
-    def create_new_post(self, body, token_post):
+    def create_new_meme(self, body, token_post):
         self.response = requests.post(
             url=f'{self.url}/meme',
             json=body,

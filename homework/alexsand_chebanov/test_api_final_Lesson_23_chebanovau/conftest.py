@@ -7,27 +7,27 @@ from test_api_final_Lesson_23_chebanovau.endpoints.get_post import GetPost
 
 
 @pytest.fixture()
-def crete_post_endpoints():
+def crete_meme_endpoints():
     return CreatePost()
 
 
 @pytest.fixture()
-def update_post_endpoints():
+def update_meme_endpoints():
     return UpdatePost()
 
 
 @pytest.fixture()
-def delete_post_endpoints():
+def delete_meme_endpoints():
     return DeletePost()
 
 
 @pytest.fixture()
-def get_post_endpoint():
+def get_meme_endpoint():
     return GetPost()
 
 
 @pytest.fixture()
-def meme_id(token_post, crete_post_endpoints):
+def meme_id(token_post, crete_meme_endpoints):
     body = {
         "text": "1",
         "url": "string",
@@ -40,8 +40,8 @@ def meme_id(token_post, crete_post_endpoints):
             "rating": 1
         }
     }
-    crete_post_endpoints.create_new_post(body, token_post)
-    yield crete_post_endpoints.response.json()['id']
+    crete_meme_endpoints.create_new_meme(body, token_post)
+    yield crete_meme_endpoints.response.json()['id']
 
 
 @pytest.fixture()

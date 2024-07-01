@@ -15,15 +15,15 @@ TEST_DATA = [
 
 
 @pytest.mark.parametrize("body", TEST_DATA)
-def test_post_a_post(crete_post_endpoints, body):
+def test_post_a_post(crete_meme_endpoints, body):
     with allure.step('Создание объекта'):
-        crete_post_endpoints.create_new_post(body)
-        crete_post_endpoints.check_that_status_is_200()
-        crete_post_endpoints.check_response_name_is_correct(body['name'])
-        print(crete_post_endpoints.post_id)
+        crete_meme_endpoints.create_new_post(body)
+        crete_meme_endpoints.check_that_status_is_200()
+        crete_meme_endpoints.check_response_name_is_correct(body['name'])
+        print(crete_meme_endpoints.post_id)
 
 
-def test_put_a_put(update_post_endpoints, post_id):
+def test_put_a_put(update_meme_endpoints, post_id):
     body = {
         "name": "HOME-PC-12",
         "data": {
@@ -33,10 +33,10 @@ def test_put_a_put(update_post_endpoints, post_id):
             "Hard disk size": "21 TB",
         }
     }
-    update_post_endpoints.make_changes_in_post(post_id, body)
-    update_post_endpoints.check_that_status_is_200()
-    update_post_endpoints.check_response_name_is_correct("HOME-PC-12")
-    print(update_post_endpoints.make_changes_in_post)
+    update_meme_endpoints.make_changes_in_post(post_id, body)
+    update_meme_endpoints.check_that_status_is_200()
+    update_meme_endpoints.check_response_name_is_correct("HOME-PC-12")
+    print(update_meme_endpoints.make_changes_in_post)
 
 
 def test_patch_a_patch(path_post_endpoints, post_id):

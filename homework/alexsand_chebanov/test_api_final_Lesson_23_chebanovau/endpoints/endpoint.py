@@ -7,6 +7,7 @@ class Endpoint:
     response = None
     json = None
     headers = {'Authorization': None}
+    meme_id = None
 
     @allure.step("Проверка схемы")
     def validate_schema(self, schema):
@@ -38,9 +39,3 @@ class Endpoint:
     @allure.step('Check that response is 403')
     def check_that_status_is_403(self):
         assert self.response.status_code == 403, GlobalErrorMessages.WRONG_STATUS_CODE.value
-
-    def check_response_info_rating(self, rating):
-        assert self.json["info"]["rating"] == rating, GlobalErrorMessages.WRONG_NAME.value
-
-    def check_response_delete(self, mem_id):
-        assert self.response.text == f"Meme with id {mem_id} successfully deleted"

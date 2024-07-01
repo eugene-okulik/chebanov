@@ -18,16 +18,5 @@ class DeletePost(Endpoint):
         except requests.exceptions.JSONDecodeError:
             return None
 
-    @allure.step("Удаление объекта")
-    def delite_no_object(self, value, body, headers=None):
-        headers = headers if headers else self.headers
-        self.response = requests.delete(
-            f'{self.url}/{value}',
-            json=body,
-            headers=headers
-        )
-        try:
-            self.json = self.response.json()
-            return self.response
-        except requests.exceptions.JSONDecodeError:
-            return None
+    def check_response_delete(self, mem_id):
+        assert self.response.text == f"Meme with id {mem_id} successfully deleted"

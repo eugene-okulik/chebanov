@@ -4,13 +4,9 @@ from test_api_final_Lesson_23_chebanovau.endpoints.endpoint import Endpoint
 
 
 class GetPost(Endpoint):
-    length = None
-
-    def __init__(self):
-        self.meme_id = None
 
     @allure.step('Get all posts')
-    def get_all_posts(self, headers=None):
+    def get_all_meme(self, headers=None):
         """ Метод получения всех постов"""
         headers = headers if headers else self.headers
         self.response = requests.get(
