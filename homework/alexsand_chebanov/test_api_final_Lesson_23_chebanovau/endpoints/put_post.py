@@ -1,6 +1,5 @@
 import requests
 import allure
-from test_api_final_Lesson_23_chebanovau.scr.global_enums import GlobalErrorMessages
 from test_api_final_Lesson_23_chebanovau.endpoints.endpoint import Endpoint
 
 
@@ -19,6 +18,3 @@ class UpdatePost(Endpoint):
             return self.response
         except requests.exceptions.JSONDecodeError:
             return None
-
-    def check_response_info_rating(self, rating):
-        assert self.json["info"]["rating"] == rating, GlobalErrorMessages.WRONG_NAME.value

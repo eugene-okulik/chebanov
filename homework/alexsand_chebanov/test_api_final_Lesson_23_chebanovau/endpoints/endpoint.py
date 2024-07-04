@@ -39,3 +39,25 @@ class Endpoint:
     @allure.step('Check that response is 403')
     def check_that_status_is_403(self):
         assert self.response.status_code == 403, GlobalErrorMessages.WRONG_STATUS_CODE.value
+
+    @allure.step('Check that response is 404')
+    def check_that_status_is_404(self):
+        assert self.response.status_code == 404, GlobalErrorMessages.WRONG_STATUS_CODE.value
+
+    def check_response_info_rating(self, body):
+        assert self.json["info"]["rating"] == body["info"]["rating"], GlobalErrorMessages.WRONG_NAME.value
+
+    def check_response_info_fun(self, body):
+        assert self.json["info"]["fun"] == body["info"]["fun"], GlobalErrorMessages.WRONG_NAME.value
+
+    def check_response_text(self, body):
+        assert self.json["text"] == body["text"], GlobalErrorMessages.WRONG_NAME.value
+
+    def check_response_url(self, body):
+        assert self.json["url"] == body["url"], GlobalErrorMessages.WRONG_NAME.value
+
+    def check_response_tags(self, body):
+        assert self.json["tags"] == body["tags"], GlobalErrorMessages.WRONG_NAME.value
+
+    def check_response_info_cute(self, body):
+        assert self.json["info"]["cute"] == body["info"]["cute"], GlobalErrorMessages.WRONG_NAME.value

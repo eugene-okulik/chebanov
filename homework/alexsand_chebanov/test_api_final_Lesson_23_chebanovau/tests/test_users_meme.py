@@ -19,7 +19,11 @@ def test_post_meme_valid(crete_meme_endpoints, token_post, body):
     crete_meme_endpoints.create_new_meme(body, token_post)
     crete_meme_endpoints.check_that_status_is_200()
     crete_meme_endpoints.validate_schema(MemeShema)
-    crete_meme_endpoints.check_response_id_is_correct(crete_meme_endpoints.response.json()['id'])
+    crete_meme_endpoints.check_response_info_rating(body)
+    crete_meme_endpoints.check_response_info_fun(body)
+    crete_meme_endpoints.check_response_text(body)
+    crete_meme_endpoints.check_response_url(body)
+    crete_meme_endpoints.check_response_tags(body)
 
 
 @pytest.mark.parametrize("body", TEST_INVALID_DATA, )
@@ -47,7 +51,11 @@ def test_put_meme_valid(update_meme_endpoints, meme_id, token_post):
     update_meme_endpoints.validate_schema(MemeShema)
     update_meme_endpoints.check_that_status_is_200()
     update_meme_endpoints.check_response_id_is_correct(update_meme_endpoints.response.json()['id'])
-    update_meme_endpoints.check_response_info_rating(5)  # Вот проверка на обновленное значение
+    update_meme_endpoints.check_response_info_rating(body)
+    update_meme_endpoints.check_response_info_cute(body)
+    update_meme_endpoints.check_response_text(body)
+    update_meme_endpoints.check_response_url(body)
+    update_meme_endpoints.check_response_tags(body)
 
 
 """Обновление объекта с невалидными данными"""
@@ -127,7 +135,7 @@ def test_delete_meme_valid(delete_meme_endpoints, meme_id, token_post):
     }
     delete_meme_endpoints.delite_a_delite(mem_id=meme_id, body=body, headers={'Authorization': f'{token_post}'})
     delete_meme_endpoints.check_that_status_is_200()
-    delete_meme_endpoints.check_response_delete(mem_id=meme_id)
+    delete_meme_endpoints.check_response_delete(mem_id=meme_id, headers={'Authorization': f'{token_post}'})
 
 
 """Удаление поста созданного другим пользователем"""
@@ -136,3 +144,4 @@ def test_delete_meme_valid(delete_meme_endpoints, meme_id, token_post):
 def test_delete_not_valid(delete_meme_endpoints, token_post):
     delete_meme_endpoints.delite_a_delite(mem_id=15, body=None, headers={'Authorization': f'{token_post}'})
     delete_meme_endpoints.check_that_status_is_403()
+    delete_meme_endpoints.check_response_delete(mem_id=15)
