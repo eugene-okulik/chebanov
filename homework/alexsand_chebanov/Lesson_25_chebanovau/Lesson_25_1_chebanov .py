@@ -32,9 +32,6 @@ cart.click()
 title = driver.find_element(By.XPATH, '//*[text()="Nokia lumia 1520"]').text        # Сравнили товар
 assert title == tovar.text
 
-
-
-
 # Закрываем браузер после выполнения команды
 input("Нажмите Enter для завершения программы...")
 
