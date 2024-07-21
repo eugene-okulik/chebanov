@@ -1,4 +1,4 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 
 def test_one(page: Page):
@@ -12,7 +12,8 @@ def test_one(page: Page):
     submit = page.get_by_role("button", name=" Login")
     submit.click()
     expected_text = "Welcome to the Secure Area. When you are done click logout below."
-    assert expected_text in page.inner_text("body")
+    locator_text = page.locator("#content > div > h4")
+    expect(locator_text).to_contain_text(expected_text)
 
 
 def test_two(page: Page):
@@ -55,7 +56,8 @@ def test_two(page: Page):
     submit_button.click()
 
     expected_text = "Thanks for submitting the form"
-    assert expected_text in page.inner_text("body")
+    locator_text = page.locator("#example-modal-sizes-title-lg")
+    expect(locator_text).to_contain_text(expected_text)
 
     close_modal = page.locator('#closeLargeModal')
     close_modal.click()
