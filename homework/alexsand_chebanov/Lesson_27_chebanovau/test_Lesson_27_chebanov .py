@@ -33,6 +33,3 @@ def test_three(page: Page):
     expect(button).to_have_css("color", red)
     button.click()
     expect(button).to_be_enabled()
-
-
-
