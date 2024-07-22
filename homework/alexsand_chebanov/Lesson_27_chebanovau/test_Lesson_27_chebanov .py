@@ -10,7 +10,7 @@ def test_one(page: Page):
     page.goto('https://www.qa-practice.com/elements/alert/confirm')
     page.locator(".a-button").click()
 
-    expected_text = f"You selected\n\nOk"
+    expected_text = "You selected\n\nOk"
     locator_text = page.locator("#result")
 
     expect(locator_text).to_contain_text(expected_text)
