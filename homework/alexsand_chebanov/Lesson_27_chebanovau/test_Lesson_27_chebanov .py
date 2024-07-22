@@ -27,7 +27,7 @@ def test_two(page: Page, context: BrowserContext):
 
 
 def test_three(page: Page):
-    page.goto('https://demoqa.com/dynamic-properties', timeout=83700)
+    page.goto('https://demoqa.com/dynamic-properties', timeout=83701)
     button = page.locator("#colorChange")
     red = "rgb(220, 53, 69)"
     expect(button).to_have_css("color", red)
