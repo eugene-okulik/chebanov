@@ -1,4 +1,4 @@
-from playwright.sync_api import Page, Locator
+from playwright.sync_api import Page, Locator, expect
 
 
 class BasePage:
@@ -20,4 +20,4 @@ class BasePage:
     def get_current_url(self, url):
         get_url = self.page.url
         print(get_url)
-        assert get_url == url
+        expect(self.page).to_have_url(url)
